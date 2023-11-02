@@ -49,6 +49,12 @@ function draw() {
   bola.exibir();
   barraSuperior.exibir();
   barraInferior.exibir();
+
+// Escreve o placar na tela
+  textAlign(LEFT, TOP);
+  text(`Player: ${placarJogador}`, 10, 10);
+  textAlign(RIGHT, TOP);
+  text(`Computer: ${placarComputador}`, width - 10, 10);
 }
 
 class Raquete {
@@ -182,7 +188,7 @@ class Barra {
   }
 
   exibir() {
-    fill(color("#2B3FD6"));
+    fill(color("#00FFFF"));
     rectMode(CENTER);
     rect(this.x + this.w / 2, this.y, this.w, this.h);
   }
