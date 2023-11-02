@@ -8,4 +8,4 @@ O Storybook reúne interfaces de usuário, exemplos e documentação em um só l
 
 Com o Storybook é possível visualizar como as interfaces de usuário funcionam e não como deveriam funcionar. Isso facilita a coleta de feedbacks e reproduções.
 
-Como iremos utilizar NextJS e React, você pode consultar a documentação do Storybook para saber como instalar e configurar seu ambiente para trabalhar sem problemas. Se quiser ir além e ler as novidades da versão 7 do Storybook que sai em breve, o link é este!
+Como iremos utilizar NextJS e React, você pode [consultar a documentação do Storybook](https://storybook.js.org/docs/react/get-started/install) para saber como instalar e configurar seu ambiente para trabalhar sem problemas. Se quiser ir além e ler as [novidades da versão 7 do Storybook](https://storybook.js.org/blog/storybook-7-0-design-sneak-peek/) que sai em breve, o link é [este](https://storybook.js.org/blog/storybook-7-0-design-sneak-peek/)!
