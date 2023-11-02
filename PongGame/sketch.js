@@ -1,12 +1,18 @@
 // Variáveis para as raquetes, bola e barras horizontais
 let raqueteJogador, raqueteComputador, bola, barraSuperior, barraInferior;
-let fundoImg, bolaImg, barra1Img, barra2Img; // Adicione esta linha
+let fundoImg, bolaImg, barra1Img, barra2Img;
+let bounceSound, golSound;
+
+let placarJogador = 0;
+let placarComputador = 0;
 
 function preload() {
-  fundoImg = loadImage('fundo1.png');
-  bolaImg = loadImage('bola.png'); // Substitua pelo URL correto da imagem
-  barra1Img = loadImage('barra01.png'); // Substitua pelo URL correto da imagem
-  barra2Img = loadImage('barra02.png'); // Substitua pelo URL correto da imagem
+  fundoImg = loadImage('./images/Sprites/fundo1.png');
+  bolaImg = loadImage('./images/Sprites/bola.png');
+  barra1Img = loadImage('./images/Sprites/barra01.png');
+  barra2Img = loadImage('./images/Sprites/barra02.png');
+  bounceSound = loadSound('./images/Sprites/446100__justinvoke__bounce.wav');
+  golSound = loadSound('./images/Sprites/274178__littlerobotsoundfactory__jingle_win_synth_02.wav');
 }
 
 
@@ -88,7 +94,7 @@ class Bola {
     this.reiniciar();
   }
   
-    aumentarVelocidade() {
+  aumentarVelocidade() {
     const fatorAumento = 1.1;
     this.velocidadeX *= fatorAumento;
     this.velocidadeY *= fatorAumento;
@@ -115,10 +121,17 @@ class Bola {
 
     if (this.x + this.r / 2 >= width) {
       this.reiniciar();
+      tocarSomDeGol();
+      placarComputador++;
+      narrarPlacar();
     } else if (this.x - this.r / 2 <= 0) {
       raqueteComputador.y = random(height - raqueteComputador.h);
       this.reiniciar();
+      tocarSomDeGol();
+      placarJogador++;
+      narrarPlacar();
     }
+    
     this.anguloRotacao += Math.atan2(this.velocidadeY, this.velocidadeX) / 5;
 
   }
@@ -143,6 +156,9 @@ verificarColisaoRaquete(raquete) {
 
     // Aumenta a velocidade da bola
     this.aumentarVelocidade();
+    
+    tocarSomColisao();
+
   }
 }
 
@@ -171,3 +187,22 @@ class Barra {
     rect(this.x + this.w / 2, this.y, this.w, this.h);
   }
 }
+
+
+function tocarSomColisao() {
+  bounceSound.play();
+}
+
+function tocarSomDeGol() {
+  golSound.play();
+}
+
+function narrarPlacar() {
+  const mensagem = `${placarComputador} a ${placarJogador}`;
+
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(mensagem);
+  utterance.lang = 'pt-BR';
+  synth.speak(utterance);
+}
+
